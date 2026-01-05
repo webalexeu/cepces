@@ -70,6 +70,8 @@ class Configuration(Base):
         auth,
         poll_interval,
         openssl_ciphers,
+        client_version=6,
+        server_version=0,
         display=None,
     ):
         super().__init__()
@@ -81,6 +83,8 @@ class Configuration(Base):
         self._poll_interval = poll_interval
         self._openssl_ciphers = openssl_ciphers
         self._display = display
+        self._client_version = client_version
+        self._server_version = server_version
 
     @property
     def endpoint(self):
@@ -89,7 +93,7 @@ class Configuration(Base):
 
     @property
     def endpoint_type(self):
-        """Return the endpoint."""
+        """Return the endpoint type."""
         return self._endpoint_type
 
     @property
@@ -127,6 +131,16 @@ class Configuration(Base):
 
         env_var = self._detect_display_type(self._display)
         return (env_var, self._display)
+
+    @property
+    def client_version(self):
+        """Return the client version to use when using a CEP request."""
+        return self._client_version
+
+    @property
+    def server_version(self):
+        """Return the server version to use when using a CEP request."""
+        return self._server_version
 
     @staticmethod
     def _detect_display_type(display_value):

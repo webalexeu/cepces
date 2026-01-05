@@ -98,6 +98,8 @@ if __name__ == '__main__':
     parser.add_argument('--principals',
         help='A list of principals to try when requesting a ticket')
     parser.add_argument('--openssl-ciphers', help='The OpenSSL cipher string')
+    parser.add_argument('--client_version', help='client_version stringto use in CEP requests')
+    parser.add_argument('--server_version', help='server_version string to use in CEP requests')
     args = parser.parse_args()
     g_overrides = {}
     if args.server is not None:
@@ -110,6 +112,10 @@ if __name__ == '__main__':
         g_overrides['poll_interval'] = args.poll_interval
     if args.openssl_ciphers is not None:
         g_overrides['openssl_ciphers'] = args.openssl_ciphers
+    if args.client_version is not None:
+        g_overrides['client_version'] = args.client_version
+    if args.server_version is not None:
+        g_overrides['server_version'] = args.server_version
     k_overrides = {}
     if args.keytab is not None:
         k_overrides['keytab'] = args.keytab
